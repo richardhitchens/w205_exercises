@@ -23,7 +23,7 @@ OF2="Timely and Effective Care - Hospital.csv"
 OF3="Readmissions and Deaths - Hospital.csv"
 OF4="Measure Dates.csv"
 OF5="hvbp_hcahps_11_10_2016.csv"
-OF6="Complications - Hospital.csv"
+OF6="Healthcare Associated Infections - Hospital.csv"
 
 # Set new file names
 NF1="hospitals.csv"
