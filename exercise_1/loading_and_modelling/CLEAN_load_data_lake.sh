@@ -13,7 +13,7 @@ hdfs dfs -rm /user/w205/hospital_compare/hospitals/hospitals.csv
 hdfs dfs -rm /user/w205/hospital_compare/effective_care/effective_care.csv
 hdfs dfs -rm /user/w205/hospital_compare/readmissions/readmissions.csv
 hdfs dfs -rm /user/w205/hospital_compare/measure/measure.csv
-hdfs dfs -rm /user/w205/hospital_compare/survey_responses/survey_respones.csv
+hdfs dfs -rm /user/w205/hospital_compare/survey_responses/survey_responses.csv
 hdfs dfs -rm /user/w205/hospital_compare/infections/infections.csv
 
 # remove the hdfs directories
