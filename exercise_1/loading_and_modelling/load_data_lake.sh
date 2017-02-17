@@ -29,9 +29,9 @@ OF6="Healthcare Associated Infections - Hospital.csv"
 NF1="hospitals.csv"
 NF2="effective_care.csv"
 NF3="readmissions.csv"
-NF4="Measure.csv"
+NF4="measure.csv"
 NF5="survey_responses.csv"
-NF6="complications.csv"
+NF6="infections.csv"
 
 # remove first line of files and rename
 tail -n +2 "$OF1" >$NF1
@@ -43,18 +43,25 @@ tail -n +2 "$OF6" >$NF6
 
 # create our hdfs directory
 hdfs dfs -mkdir /user/w205/hospital_compare
+hdfs dfs -mkdir /user/w205/hospital_compare/hospitals
+hdfs dfs -mkdir /user/w205/hospital_compare/effective_care
+hdfs dfs -mkdir /user/w205/hospital_compare/readmissions
+hdfs dfs -mkdir /user/w205/hospital_compare/measure
+hdfs dfs -mkdir /user/w205/hospital_compare/survey_responses
+hdfs dfs -mkdir /user/w205/hospital_compare/infections
 
 # copy the files to hdfs
-hdfs dfs -put $NF1 /user/w205/hospital_compare
-hdfs dfs -put $NF2 /user/w205/hospital_compare
-hdfs dfs -put $NF3 /user/w205/hospital_compare
-hdfs dfs -put $NF4 /user/w205/hospital_compare
-hdfs dfs -put $NF5 /user/w205/hospital_compare
-hdfs dfs -put $NF6 /user/w205/hospital_compare
+hdfs dfs -put $NF1 /user/w205/hospital_compare/hospitals
+hdfs dfs -put $NF2 /user/w205/hospital_compare/effective_care
+hdfs dfs -put $NF3 /user/w205/hospital_compare/readmissions
+hdfs dfs -put $NF4 /user/w205/hospital_compare/measure
+hdfs dfs -put $NF5 /user/w205/hospital_compare/survey_responses
+hdfs dfs -put $NF6 /user/w205/hospital_compare/infections
 
 # return to starting directory
 cd $CURR_DIR
 
 # graceful exit
 exit
+
 
