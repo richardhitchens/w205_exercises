@@ -8,21 +8,13 @@ rm ~/staging/exercise_1/*
 rmdir ~/staging/exercise_1
 rmdir ~/staging
 
-# Set file names
-F1="hospitals.csv"
-F2="effective_care.csv"
-F3="readmissions.csv"
-F4="measure.csv"
-F5="survey_responses.csv"
-F6="infections.csv"
-
 # remove the files from hdfs
-hdfs dfs -rm $F1 /user/w205/hospital_compare/hospitals
-hdfs dfs -rm $F2 /user/w205/hospital_compare/effective_care
-hdfs dfs -rm $F3 /user/w205/hospital_compare/readmissions
-hdfs dfs -rm $F4 /user/w205/hospital_compare/measure
-hdfs dfs -rm $F5 /user/w205/hospital_compare/survey_responses
-hdfs dfs -rm $F6 /user/w205/hospital_compare/infections
+hdfs dfs -rm /user/w205/hospital_compare/hospitals/hospitals.csv
+hdfs dfs -rm /user/w205/hospital_compare/effective_care/effective_care.csv
+hdfs dfs -rm /user/w205/hospital_compare/readmissions/readmissions.csv
+hdfs dfs -rm /user/w205/hospital_compare/measure/measure.csv
+hdfs dfs -rm /user/w205/hospital_compare/survey_responses/survey_respones.csv
+hdfs dfs -rm /user/w205/hospital_compare/infections/infections.csv
 
 # remove the hdfs directories
 hdfs dfs -rmdir /user/w205/hospital_compare/hospitals
