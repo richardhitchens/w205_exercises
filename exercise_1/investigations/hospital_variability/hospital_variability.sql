@@ -1,7 +1,7 @@
 SELECT
  a.measure_id,
- b.measure_name,
- a.stddev
+ a.stddev,
+ b.measure_name
 FROM
  (SELECT
    measure_id,

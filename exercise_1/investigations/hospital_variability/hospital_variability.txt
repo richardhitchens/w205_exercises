@@ -1,0 +1,13 @@
+Hospital VariabilityWhich procedures have the greatest variability between hospitals?For the purpose of this analysis I consider my indicators of mortality, readmission and infection incidence as outputs of procedural care, as such I don’t include them in my definition of procedures (if they were to be included the analysis process could simply be extended to include them by joining their underlying factors to the timeliness and effective care data set).Having defined procedures in this way it was then necessary to calculate a standardized measure of procedural dispersion for each of the included procedures. Given that some of the procedures are measured in time and some in percentages the best measure of standardized variability to enable comparison across all procedures is the coefficient of variation, which standardizes procedural variability across hospitals for each procedure by dividing the standard deviation of the procedure outcomes by the average of procedure outcomes. The coefficient of variation produces a statistic which is measured in units of numbers of standard deviations rather than units of the underlying variable, which enables standardized comparison across procedures. To produce the final results it was also necessary to join the procedure (or measure) name to the query using the measure ID from the my_measures table.The most variable 10 procedures are shown in the table below:ID      CV      ProcedureVTE_6   2.439   Hospital Acquired Potentially-Preventable Venous Thromboembolism
+OP_31	1.987	Percentage of patients aged 18 years and older who had cataract surgery and had improvement in visual function achieved within 90 days following the cataract surgery
+PC_01	1.91	Elective Delivery
+STK_4	1.714	Thrombolytic Therapy
+VTE_5	1.605	Venous Thromboembolism Warfarin Therapy Discharge Instructions
+OP_30	1.396	Colonoscopy Interval for Patients with a History of Adenomatous Polyps - Avoidance of Inappropriate Use
+OP_4	1.351	Aspirin at Arrival
+OP_29	1.221	Appropriate Follow-Up Interval for Normal Colonoscopy in Average Risk Patients
+OP_22	0.989	Left without being seen
+OP_2	0.75	Fibrinolytic Therapy Received Within 30 Minutes of ED Arrivalwhere:
+ID = measure_id
+CV = coefficient of variation of procedure outcomes across all hospitals
+Procedure = measure_nameObservations:The results are not that surprising in that the more variable procedures are the more obscure or potentially risky procedures and to some degree are later in the timeline of the overall hospital visit, i.e. for example there is less variability across hospitals for procedures that occur at the time of arrival at the hospital, for which they possibly have more control.
