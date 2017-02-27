@@ -32,14 +32,20 @@ LEFT OUTER JOIN
  ON
   (f.provider_id = e.provider_id);
 
-DROP TABLE IF EXISTS quality_zscore;
-CREATE TABLE quality_zscore
+DROP TABLE IF EXISTS my_quality_zscores;
+CREATE TABLE my_quality_zscores
 AS SELECT
  provider_id,
+ z_care,
+ z_infection,
+ z_death,
+ z_readmit,
  0.5*z_care + 0.2*z_infection + 0.1*z_death +0.2*z_readmit AS zscore
 FROM
  quality_zscores;
 
+
+DROP TABLE IF EXISTS quality_zscores;
 DROP TABLE IF EXISTS effective_care_zscore;
 DROP TABLE IF EXISTS infection_rates_zscore;
 DROP TABLE IF EXISTS readmission_rates_zscore;
