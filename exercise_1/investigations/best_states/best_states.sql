@@ -4,7 +4,7 @@ SELECT
 FROM
  my_hospitals a
 LEFT OUTER JOIN
-  quality_zscore b
+  my_quality_zscores b
 ON
  (a.provider_id = b.provider_id)
 WHERE

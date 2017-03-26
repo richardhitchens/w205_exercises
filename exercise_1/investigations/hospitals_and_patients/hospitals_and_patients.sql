@@ -6,7 +6,7 @@ FROM
    a.zscore as zscore,
    b.rating as rating
   FROM
-   quality_zscore a
+   my_quality_zscores a
   LEFT OUTER JOIN
    my_survey_ratings b
   ON
