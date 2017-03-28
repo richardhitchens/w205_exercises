@@ -2,7 +2,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 from collections import Counter
 from streamparse.bolt import Bolt
-
+import psycopg2
 
 
 class WordCounter(Bolt):
@@ -11,18 +11,33 @@ class WordCounter(Bolt):
         self.counts = Counter()
 
     def process(self, tup):
-        word = tup.values[0]
-
-        # Write codes to increment the word count in Postgres
-        # Use psycopg to interact with Postgres
-        # Database name: Tcount 
-        # Table name: Tweetwordcount 
-        # you need to create both the database and the table in advance.
-        
+        uWord = tup.values[0]
 
         # Increment the local count
-        self.counts[word] += 1
-        self.emit([word, self.counts[word]])
+        self.counts[uWord] += 1
+        uCount = self.counts[uWord]
+
+        # Insert data into tweetwordcount table
+
+        # Connect to existing database tcount
+        tcount_connection = psycopg2.connect(database="tcount", user="postgres", password="pass", host="localhost", port="5432")
+
+        # Open a cursor to perform database operations
+        tcount_cursor = tcount_connection.cursor()
+
+        # tcount_cursor.execute("INSERT INTO tweetwordcount (word, count) VALUES ('test', 1)");
+
+        # Insert/Update and make permanent in the database
+        tcount_cursor.execute("INSERT INTO tweetwordcount (word, count) VALUES ('test', 1) ON CONFLICT (word) DO UPDATE SET count=%s WHERE word=%s", (uCount, uWord));
+        tcount_connection.commit()
+
+        # Close communication with the database
+        tcount_cursor.close()
+        tcount_connection.close()
+
+        # Emit the resultant tuple
+        self.emit([uWord, uCount])
 
         # Log the count - just to see the topology running
-        self.log('%s: %d' % (word, self.counts[word]))
+        self.log('%s: %d' % (uWord, uCount))
+
