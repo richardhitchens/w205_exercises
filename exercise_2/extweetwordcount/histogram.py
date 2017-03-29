@@ -3,7 +3,11 @@
 import sys
 import psycopg2
 
-def main(uWord):
+def main(len1, len2):
+    # cast len1 and len2 as integers
+    len1 = int(len1)    
+    len2 = int(len2)    
+
     # Connect to existing database tcount
     tcount_connection = psycopg2.connect(database="tcount", user="postgres", password="pass", host="localhost", port="5432")
 
@@ -11,17 +15,10 @@ def main(uWord):
     tcount_cursor = tcount_connection.cursor()
 
     # Query the database and obtain data as Python objects
-    if not uWord:
-        tcount_cursor.execute("SELECT word, count from tweetwordcount WHERE word=%s", (uWord))
-        record = tcount_cursor.fetchone()
-        print 'Total number of occurrences of "' + str(record[0]) + '":', record[1], '\n'
-
-    else:
-        tcount_cursor.execute("SELECT word, count from tweetwordcount;")
+    tcount_cursor.execute("SELECT word, count from tweetwordcount WHERE count >= len1 AND count <= len2;")
         records = tcount_cursor.fetchall()
         for rec in records:
-            print rec, ","
-        print "\n"        
+            print rec[0] +  ":", rec[1], "\n"        
 
     # Close communication with the database
     tcount_cursor.close()
@@ -29,9 +26,6 @@ def main(uWord):
 
 if __name__ == '__main__':
     # run the query
-    if len(sys.argv) == 1:
-        main(False)
-    else:
-        main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])
 
 
