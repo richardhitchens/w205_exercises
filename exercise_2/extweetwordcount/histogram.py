@@ -12,10 +12,11 @@ def main(len1, len2):
     tcount_cursor = tcount_connection.cursor()
 
     # Query the database and obtain data as Python objects
-    tcount_cursor.execute("SELECT word, count from tweetwordcount WHERE count >= len1 AND count <= len2;")
+    tcount_cursor.execute("SELECT word, count from tweetwordcount WHERE count >= %s AND count <= %s;", (len1, len2))
     records = tcount_cursor.fetchall()
+    print "All words of frequency between", len1, "and", len2, "times in the database:"
     for rec in records:
-        print rec[0] +  ":", rec[1], "\n"        
+        print rec[0] +  ":", rec[1]       
 
     # Close communication with the database
     tcount_cursor.close()
