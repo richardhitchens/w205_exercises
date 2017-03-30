@@ -20,7 +20,7 @@ def main(uWord):
         records = tcount_cursor.fetchall()
         my_str = ''
         for rec in records:
-            my_str += rec + ","
+            my_str += rec + ", "
         print my_str[:-1] + "\n"        
 
     # Close communication with the database
