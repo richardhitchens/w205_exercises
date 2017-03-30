@@ -25,14 +25,15 @@ class WordCounter(Bolt):
         # Open a cursor to perform database operations
         tcount_cursor = tcount_connection.cursor()
 
-        # Update
-        tcount_cursor.execute("WITH rows AS (UPDATE tweetwordcount SET count=%s WHERE word=%s RETURNING *) SELECT COUNT(*) FROM rows;", (uCount, uWord))
+        # Update tweetwordcount
+        tcount_cursor.execute("UPDATE tweetwordcount SET count=%s WHERE word=%s RETURNING word", (uCount, uWord))
+        # Check if any rows were updated
         record = tcount_cursor.fetchall()
         num_rows = len(record)
 
-        # Insert if update is unsuccessful
+        # Insert if update is unsuccessful, i.e. no rows updated
         if num_rows == 0:
-            tcount_cursor.execute("INSERT INTO tweetwordcount (word, count) VALUES ('test', 1)");
+            tcount_cursor.execute("INSERT INTO tweetwordcount (word, count) VALUES (%s, %s)", (uWord, uCount))
 
         # make changes to the database permanent
         tcount_connection.commit()

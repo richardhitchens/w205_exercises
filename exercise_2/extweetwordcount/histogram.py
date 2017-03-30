@@ -16,9 +16,9 @@ def main(len1, len2):
 
     # Query the database and obtain data as Python objects
     tcount_cursor.execute("SELECT word, count from tweetwordcount WHERE count >= len1 AND count <= len2;")
-        records = tcount_cursor.fetchall()
-        for rec in records:
-            print rec[0] +  ":", rec[1], "\n"        
+    records = tcount_cursor.fetchall()
+    for rec in records:
+        print rec[0] +  ":", rec[1], "\n"        
 
     # Close communication with the database
     tcount_cursor.close()
