@@ -3,8 +3,8 @@
 import sys
 import psycopg2
 
-def main(len1, len2):
-    
+def main(num_top):
+
     # Connect to existing database tcount
     tcount_connection = psycopg2.connect(database="tcount", user="postgres", password="pass", host="localhost", port="5432")
 
@@ -12,10 +12,10 @@ def main(len1, len2):
     tcount_cursor = tcount_connection.cursor()
 
     # Query the database and obtain data as Python objects
-    tcount_cursor.execute("SELECT word, count from tweetwordcount WHERE count >= len1 AND count <= len2;")
-        records = tcount_cursor.fetchall()
-        for rec in records:
-            print rec[0] +  ":", rec[1], "\n"        
+    tcount_cursor.execute("SELECT word, count from tweetwordcount ORDER BY count DESC LIMIT %s", (num_top))
+    records = tcount_cursor.fetchall()
+    for rec in records:
+        print rec[0] +  ":", rec[1], "\n"
 
     # Close communication with the database
     tcount_cursor.close()
@@ -23,7 +23,6 @@ def main(len1, len2):
 
 if __name__ == '__main__':
     # run the query
-    args = sys.argv[1].split(',')    
-    main(int(args[0]), int(args[1]))
+    main(int(sys.args[1]))
 
 
