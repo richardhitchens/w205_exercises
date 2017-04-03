@@ -13,6 +13,9 @@ try:
     
     # Open a cursor to perform database operations
     postgres_cursor = postgres_connection.cursor()
+
+    # Execute a command: to drop tcount database if exists
+    postgres_cursor.execute("DROP DATABASE IF EXISTS tcount;")
     
     # Execute a command: to create tcount database
     postgres_cursor.execute("CREATE DATABASE tcount;")
@@ -31,6 +34,9 @@ tcount_connection = psycopg2.connect(database="tcount", user="postgres", passwor
 
 # Open a cursor to perform database operations
 tcount_cursor = tcount_connection.cursor()
+
+# Execute a command: to drop tweetwordcount table in the database if exists
+tcount_cursor.execute("DROP TABLE IF EXISTS tweetwordcount;")
 
 # Execute a command: to create tweetwordcount table in the database
 tcount_cursor.execute("CREATE TABLE tweetwordcount (word TEXT PRIMARY KEY, count INT NOT NULL);")

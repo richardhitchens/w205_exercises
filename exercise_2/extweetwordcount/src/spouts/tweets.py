@@ -34,7 +34,7 @@ class TweetStreamListener(tweepy.StreamListener):
         self.listener.queue().put(status.text, timeout = 0.01)
         return True
   
-    def on_error(self, status_code):
+    def on_error(self, status_code):  
         return True # keep stream alive
   
     def on_limit(self, track):
@@ -84,4 +84,5 @@ class Tweets(Spout):
         pass  # if a tuple is processed properly, do nothing
 
     def fail(self, tup_id):
+	self.log('wordcount bolt fail')
         pass  # if a tuple fails to process, do nothing

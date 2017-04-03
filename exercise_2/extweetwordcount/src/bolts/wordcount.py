@@ -48,3 +48,11 @@ class WordCounter(Bolt):
         # Log the count - just to see the topology running
         self.log('%s: %d' % (uWord, uCount))
 
+    def fail(self, tup):
+        """Indicate that processing of a tuple has failed.
+        :param tup: the tuple to fail (its ``id`` if ``str``).
+        :type tup: :class:`str` or :class:`streamparse.storm.component.Tuple`
+        """
+        tup_id = tup.id if isinstance(tup, Tuple) else tup
+        self.send_message({'command': 'fail', 'id': tup_id})
+
