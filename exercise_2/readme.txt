@@ -9,11 +9,11 @@ As root user:
 •	Install Tweepy by running: $ pip install tweepy
 •	Start Postgres by running: $ /data/start_postgres.sh
 
-Switch user to w205 by running: $ su – w205
+Switch user to w205 by running: $ su - w205
 
 Clone my Git repository by running:  $ git clone https://github.com/richardhitchens/w205_exercises.git
 
-Change directory to $ ~/w205_exercises/exercise_2/extweetwordcount
+Change directory to $ cd ~/w205_exercises/exercise_2/extweetwordcount
 
 Create the Postgres database and table by running: $ python database.py
 
@@ -33,6 +33,6 @@ All done!
 Shut down the instance:
 •	Return to root user:  $ exit
 •	Stop Hadoop:  $ /root/stop-hadoop.sh
-•	Stop Postgres:  $ /data/stop-postgres.sh
-•	Terminate the EC2 instance in AWS
+•	Stop Postgres:  $ /data/stop_postgres.sh
+Terminate the EC2 instance in AWS
 
